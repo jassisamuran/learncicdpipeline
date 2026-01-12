@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10]
 
     steps:
       - name: Checkout code
@@ -17,14 +20,30 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.8"
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Lint code
+        run: flake8 src tests
+
+      - name: Run tests with coverage
         env:
           PYTHONPATH: .
-        run: pytest
+        run: pytest --cov=src --cov-report=term
+
+      - name: Build project
+        run: python -m compileall src
+
+      - name: Deploy (only on main)
+        if: github.ref == 'refs/heads/main'
+        run: echo "Deploying application"
