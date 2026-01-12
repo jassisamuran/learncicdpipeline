@@ -1,0 +1,63 @@
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# -------------------------
+# Virtual Environments
+# -------------------------
+venv/
+.venv/
+env/
+ENV/
+
+# -------------------------
+# Pytest / Test artifacts
+# -------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# -------------------------
+# Distribution / Packaging
+# -------------------------
+build/
+dist/
+*.egg-info/
+
+# -------------------------
+# Environment variables
+# -------------------------
+.env
+.env.*
+
+# -------------------------
+# Logs
+# -------------------------
+*.log
+
+# -------------------------
+# OS files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Editors / IDEs
+# -------------------------
+.vscode/
+.idea/
+*.swp
+
+# -------------------------
+# GitHub Actions artifacts
+# -------------------------
+.github/actions/cache/
+
+# -------------------------
+# Jupyter (if used)
+# -------------------------
+.ipynb_checkpoints/
